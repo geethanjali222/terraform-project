@@ -24,4 +24,4 @@ jobs:
 
       - name: Create S3 Bucket
         run: |
-          aws s3api create-bucket --bucket Iam_s3_bucket222  --region us-east-1
+          terraform plan
