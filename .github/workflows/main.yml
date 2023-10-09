@@ -15,8 +15,6 @@ jobs:
 
     - name: Set up AWS CLI
       run: |
-        echo ${{ secrets.AKIA5JNSF6GGCV4P5CJQ}} >> aws_access_key.txt
-        echo ${{ secrets.MDAQZtzpY2n3Xv3FEMQpNbrL/4iDU69pMpF7YY9Q }} >> aws_secret_key.txt
         aws configure set aws_access_key_id $(cat aws_access_key.txt)
         aws configure set aws_secret_access_key $(cat aws_secret_key.txt)
         aws configure set default.region us-east-1
