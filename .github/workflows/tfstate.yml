@@ -23,7 +23,8 @@ jobs:
 
       - name: Create S3 Bucket
         run: |
-          aws s3api create-bucket --bucket my_unique_bucket222anj --region us-east-1
+          aws s3api create-bucket --bucket my-unique-bucket-123 --region us-east-1
+
 
 
       - name: Add Tags to S3 Bucket
