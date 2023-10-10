@@ -25,8 +25,7 @@ jobs:
         run: |
           aws s3api create-bucket --bucket my-unique-bucket222-anji --region us-east-1
 
-
-
       - name: Add Tags to S3 Bucket
         run: |
-          aws s3api put-bucket-tagging --bucket my-unique-bucket222-anji --tagging 'TagSet=[{"Key":"Name","Value":"my-unique-bucket222-anji"},{"Key":"component","Value":"tfstate"}]'
+         aws s3api put-bucket-tagging --bucket my-unique-bucket222-anji --tagging "TagSet=[{\"Key\":\"Name\",\"Value\":\"my-unique-bucket222-anji\"},{\"Key\":\"component\",\"Value\":\"tfstate\"}]"
+
