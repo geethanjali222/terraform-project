@@ -1,0 +1,27 @@
+name: Create S3 Bucket
+
+on: [push]
+
+jobs:
+  create-s3-bucket:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up AWS CLI
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AKIA5JNSF6GGN2OKIUOF }}
+        aws-secret-access-key: ${{ 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}}
+        aws-region: us-east-1
+
+    - name: Create S3 Bucket
+      run: |
+        aws s3api create-bucket \
+          --bucket My_Bucket222 \
+          --create-bucket-configuration LocationConstraint=us-east-1
+
+    - name: Complete
+      run: echo "S3 bucket created."
