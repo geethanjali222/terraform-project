@@ -22,8 +22,12 @@ jobs:
 
       - name: Create EC2 Instance
         run: |
-          # Use AWS CLI or SDK to create EC2 instances
-          aws ec2 run-instances \
-            --image-id ami-041feb57c611358bd \
-            --instance-type t2.micro \
-            --key-name jan2023
+         aws ec2 run-instances \
+         --image-id ami-041feb57c611358bd \
+         --instance-type t2.micro \
+         --key-name jan2023
+
+
+
+
+
