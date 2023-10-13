@@ -1,4 +1,4 @@
-name: Create a ec2-instance
+name: Provision t3.micro EC2
 on:
   workflow_dispatch:
     inputs:
@@ -8,7 +8,7 @@ on:
         default: 'ec2-instance222'
         type: string
 jobs:
-  create-ec2:
+  provision-ec2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
