@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+    inputs:
+      tfstate_bucket_name:
+        description: 'ec2-instance222'
+        required: true
+        default: 'my_ec2_instance222'
+
+jobs:
+  create-ec2:
+    name: Create EC2 Instance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+          aws-region: us-east-1
+
+      - name: Create EC2 Instance
+        run: |
+          aws ec2 run-instances \
+            --image-id ami-041feb57c611358bd
+            --instance-type t2.micro \           
+            --key-name jan2023
+            --subnet-id subnet-06b27039b18569e06\      
+            --security-group-ids sg-0a77ec80ab4ff9107
+            --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=my-instance222}]'
