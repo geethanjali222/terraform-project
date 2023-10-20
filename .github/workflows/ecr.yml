@@ -5,11 +5,11 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: demo-deploy
-  ECS_SERVICE: demo-deploy
-  ECS_CLUSTER: demo-deploy
+  ECR_REPOSITORY: demo-app-repo222
+  ECS_SERVICE: demo-app-repo222
+  ECS_CLUSTER: demo-app-repo222
   ECS_TASK_DEFINITION: .github/workflows/task-definition.json
-  CONTAINER_NAME: demo-deploy
+  CONTAINER_NAME: demo-app-repo222
 
 permissions:
   id-token: write
@@ -27,8 +27,8 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::960724874021:role/Github
-        role-session-name: Github
+        role-to-assume: arn:aws:iam::913591103884:role/Github-demo
+        role-session-name: Github-demo
         aws-region: ${{ env.AWS_REGION }}
 
     - name: Login to Amazon ECR
