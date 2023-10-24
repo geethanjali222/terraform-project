@@ -36,7 +36,7 @@ resource "aws_lb" "my_app_lb" {
   name               = "my-app-lb"
   internal           = false
   load_balancer_type = "application"
-  subnets            = ["subnet-12345678", "subnet-87654321"]  # Replace with your subnet IDs
+  subnets            = ["subnet-06b27039b18569e06", "subnet-0a5b11c7b884e3597"]  
   enable_deletion_protection = false
 }
 
@@ -45,7 +45,7 @@ resource "aws_lb_target_group" "my_target_group" {
   name     = "my-target-group"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = "vpc-12345678"  # Replace with your VPC ID
+  vpc_id   = "vpc-0b3c3333643d21043"  
   health_check {
     path                = "/"
     interval            = 30
@@ -104,8 +104,8 @@ resource "aws_ecs_service" "my_app_service" {
   task_definition = aws_ecs_task_definition.my_task.arn
   launch_type     = "EC2"
   network_configuration {
-    subnets = ["subnet-12345678", "subnet-87654321"]  # Replace with your subnet IDs
-    security_groups = ["sg-12345678"]  # Replace with your security group IDs
+    subnets = ["subnet-06b27039b18569e06", "subnet-0a5b11c7b884e3597"]  
+    security_groups = ["sg-0a77ec80ab4ff9107"]  
   }
   load_balancer {
     target_group_arn = aws_lb_target_group.my_target_group.arn
