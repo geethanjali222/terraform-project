@@ -1,0 +1,33 @@
+name: Deploy ECS Infrastructure
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY _ID}}
+      AWS_DEFAULT_REGION: us-east-1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Initialize Terraform
+        run: terraform init
+
+      - name: Plan
+        run: terraform plan -var "region=us-east-1" -var "ecs_cluster_name=my-cluster" -var "ecs_execution_role_name=ecs_execution_role" -var "load_balancer_name=my-app-lb" -var "load_balancer_subnets=subnet-06b27039b18569e06,subnet-0a5b11c7b884e3597" -var "load_balancer_vpc_id=vpc-0b3c3333643d21043" -var "target_group_name=my-target-group" -var "ecs_service_name=my-app-service" -var "ecs_service_subnets=subnet-06b27039b18569e06,subnet-0a5b11c7b884e3597" -var "ecs_service_security_groups=sg-0a77ec80ab4ff9107" -var "container_name=my-app-container" -var "container_port=80"
+
+      - name: Apply
+        run: terraform apply -auto-approve -var "region=us-east-1" -var "ecs_cluster_name=my-cluster" -var "ecs_execution_role_name=ecs_execution_role" -var "load_balancer_name=my-app-lb" -var "load_balancer_subnets=subnet-06b27039b18569e06,subnet-0a5b11c7b884e3597" -var "load_balancer_vpc_id=vpc-0b3c3333643d21043" -var "target_group_name=my-target-group" -var "ecs_service_name=my-app-service" -var "ecs_service_subnets=subnet-06b27039b18569e06,subnet-0a5b11c7b884e3597" -var "ecs_service_security_groups=sg-0a77ec80ab4ff9107" -var "container_name=my-app-container" -var "container_port=80"
