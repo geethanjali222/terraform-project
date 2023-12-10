@@ -1,16 +1,22 @@
 name: Create S3 Bucket
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+     bucket_name:
+     description: 'bucket name'
+     required: true
+     default: 'my-s3-bucket'
+     
+    
 
 jobs:
-  create-s3-bucket:
+create-s3:
+  name: create-s3-bucket:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up AWS CLI
@@ -18,26 +24,8 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
-          aws-region: us-east-1  # Replace with your desired AWS region
+          aws-region: us-east-1 
 
-      - name: Create S3 Bucket
-        run: |
-          set -e  # Exit on error
-
-          BUCKET_NAME=my-unique-bucket-name  # Replace with your desired bucket name
-
-          aws s3api create-bucket \
-            --bucket $BUCKET_NAME \
-             --create-bucket-configuration LocationConstraint=us-east-1
-
-
-          # Additional debugging commands
-          aws s3 ls  # List S3 buckets for debugging
-          aws s3api list-objects --bucket $BUCKET_NAME  # List objects in the newly created bucket
-
-      - name: Check for Errors
-        run: |
-          if [ $? -ne 0 ]; then
-            echo "Error: AWS CLI command failed"
-            exit 1
-          fi
+     -name: create s3 bucket
+     run: |
+      aws s3api create-bucket --bucket animal-222-bucket-name --region us-east-1
