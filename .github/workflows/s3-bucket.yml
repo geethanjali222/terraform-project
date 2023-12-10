@@ -1,0 +1,30 @@
+name: S3-Bucket
+
+on :
+ push :
+  branches :
+   - main
+
+jobs :
+ create-s3-bucket :
+   runs-on : ubuntu-latest
+
+   steps :
+     - name : Checkout Repository
+       uses: actions/checkout@v2
+
+     - name: Set up AWS CLI
+       uses: aws-actions/configure-aws-credentials@v1
+       with:
+        aws-access-key-id: ${{ AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ AWS_SECRET_ACCESS_KEY_ID }}
+        aws-region: us-east-1a
+
+     - name: Create S3 Bucket
+       run: |
+        aws s3api create-bucket \
+        --bucket my-unique221-bucket \
+        --create-bucket-configuration LocationConstraint=us-east-1a
+   
+ 
+
