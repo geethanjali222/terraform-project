@@ -28,7 +28,8 @@ jobs:
 
           aws s3api create-bucket \
             --bucket $BUCKET_NAME \
-            --create-bucket-configuration LocationConstraint=us-east-1  # Replace with your desired AWS region
+             --create-bucket-configuration LocationConstraint=us-east-1
+
 
           # Additional debugging commands
           aws s3 ls  # List S3 buckets for debugging
