@@ -24,13 +24,15 @@ jobs:
         run: |
           set -e  # Exit on error
 
+          BUCKET_NAME=my-unique-bucket-name  # Replace with your desired bucket name
+
           aws s3api create-bucket \
-            --bucket <your-bucket-name> \
+            --bucket $BUCKET_NAME \
             --create-bucket-configuration LocationConstraint=us-east-1  # Replace with your desired AWS region
 
           # Additional debugging commands
           aws s3 ls  # List S3 buckets for debugging
-          aws s3api list-objects --bucket <your-bucket-name>  # List objects in the newly created bucket
+          aws s3api list-objects --bucket $BUCKET_NAME  # List objects in the newly created bucket
 
       - name: Check for Errors
         run: |
