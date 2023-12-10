@@ -21,9 +21,11 @@ jobs:
           aws-region: us-east-1
 
       - name: Create S3 Bucket
-        run: |
-          aws s3api create-bucket \
-            --bucket my-221bucket222-name \
-            --create-bucket-configuration LocationConstraint=us-east-1
+          run:|
+           aws s3api create-bucket \
+            --bucket animal-bucket-223 \
+           --create-bucket-configuration LocationConstraint=us-east-1 
+         aws s3 ls
+
 
   
