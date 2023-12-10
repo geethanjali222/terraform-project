@@ -17,11 +17,24 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
-          aws-region: us-east-1  
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Replace with your desired AWS region
 
       - name: Create S3 Bucket
         run: |
+          set -e  # Exit on error
+
           aws s3api create-bucket \
-            --bucket california-bucket-name \
-            --create-bucket-configuration LocationConstraint=us-east-1  
+            --bucket <your-bucket-name> \
+            --create-bucket-configuration LocationConstraint=us-east-1  # Replace with your desired AWS region
+
+          # Additional debugging commands
+          aws s3 ls  # List S3 buckets for debugging
+          aws s3api list-objects --bucket <your-bucket-name>  # List objects in the newly created bucket
+
+      - name: Check for Errors
+        run: |
+          if [ $? -ne 0 ]; then
+            echo "Error: AWS CLI command failed"
+            exit 1
+          fi
