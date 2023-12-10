@@ -1,0 +1,31 @@
+name: Create S3 Bucket
+
+on:
+  workflow_dispatch:
+    inputs:
+     bucket_name:
+     description: 'bucket name'
+     required: true
+     default: 'my-s3-bucket'
+     
+    
+
+jobs:
+create-s3:
+  name: create-s3-bucket:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+          aws-region: us-east-1 
+
+     -name: create s3 bucket
+     run: |
+      aws s3api create-bucket --bucket animal-222-bucket-name --region us-east-1
